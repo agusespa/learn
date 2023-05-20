@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Pepeland Infinite Tetris</title>
+        <style>
+            html {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-image: url('assets/pepe-happy.gif');
+                background-repeat: repeat;
+            }
+            canvas {
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas width="300" height="600" id="board"></canvas>
+        <div style="display: none">
+            <img id="game-over" src="assets/pepe-sad.jpg" width="300" height="300" />
+        </div>
+    </body>
+    <script src="./logic.js"></script>
+</html>
