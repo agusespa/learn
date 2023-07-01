@@ -1,11 +1,10 @@
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Text {
-
     private static String filename = "corpus.txt";
     private static String fileContent = "";
     private static String word = "";
@@ -29,7 +28,7 @@ public class Text {
         long start = System.currentTimeMillis();
 
         try {
-            fileContent = Files.readString(Path.of("./"+ filename));
+            fileContent = Files.readString(Path.of("./" + filename));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +57,7 @@ public class Text {
                 word += Character.toLowerCase(ch);
             }
         }
-        
+
         finish = System.currentTimeMillis();
         elapsed = finish - start;
         System.out.println("Elapsed time: " + elapsed + " milliseconds");
