@@ -1,12 +1,16 @@
 const myWorker = new Worker("worker.js");
 
-myWorker.postMessage([10000,50]);
+myWorker.postMessage({first: 10000, second: 400});
 console.log("Message posted to worker");
 
-myWorker.onmessage = (e) => {
+myWorker.onMessage = (e) => {
   result.textContent = e.data;
   console.log("Message received from worker");
 };
-console.log(myWorker);
+
+worker.onerror = workerError;
+function workerError(error) {
+  console.error(error.message);
+}
 
 myWorker.terminate();
