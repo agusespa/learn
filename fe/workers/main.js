@@ -8,9 +8,7 @@ myWorker.onMessage = (e) => {
   console.log("Message received from worker");
 };
 
-worker.onerror = workerError;
+myWorker.onerror = workerError;
 function workerError(error) {
   console.error(error.message);
 }
-
-myWorker.terminate();
