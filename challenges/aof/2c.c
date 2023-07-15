@@ -24,7 +24,7 @@ int main() {
     char response[4];
 
     // Open the input file
-    FILE *file = fopen("input.txt", "r");
+    FILE *file = fopen("input2.txt", "r");
     if (file == NULL) {
         printf("Failed to open the input file.\n");
         return 1;

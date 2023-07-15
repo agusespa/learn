@@ -13,8 +13,7 @@ int main(void) {
     clock_t start = clock();
 
     char str[5];
-    int totalScore = 0;
-    int roundScore = 0;
+    int score = 0;
 
     // only for testing performance
     for (int i = 0; i < 100000000; i++) {
@@ -22,50 +21,40 @@ int main(void) {
         while (fgets(str, sizeof(str), fp) != NULL) {
             if (str[0] == 'A') {
                 if (str[2] == 'X') {
-                    roundScore = 3;
+                    score += 3 + 1;
                 } else if (str[2] == 'Y') {
-                    roundScore = 6;
+                    score += 6 + 2;
                 } else if (str[2] == 'Z') {
-                    roundScore = 0;
+                    score += 0 + 3;
                 }
             } else if (str[0] == 'B') {
                 if (str[2] == 'X') {
-                    roundScore = 0;
+                    score += 0 + 1;
                 } else if (str[2] == 'Y') {
-                    roundScore = 3;
+                    score += 3 + 2;
                 } else if (str[2] == 'Z') {
-                    roundScore = 6;
+                    score += 6 + 3;
                 }
             } else if (str[0] == 'C') {
                 if (str[2] == 'X') {
-                    roundScore = 6;
+                    score += 6 + 1;
                 } else if (str[2] == 'Y') {
-                    roundScore = 0;
+                    score += 0 + 2;
                 } else if (str[2] == 'Z') {
-                    roundScore = 3;
+                    score += 3 + 3;
                 }
             }
-
-            if (str[2] == 'X') {
-                roundScore += 1;
-            } else if (str[2] == 'Y') {
-                roundScore += 2;
-            } else if (str[2] == 'Z') {
-                roundScore += 3;
-            }
-
-            totalScore += roundScore;
         }
     }
 
     // only for testing performance
     clock_t end = clock();
     double elapsedSeconds = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Elapsed Time: %.6f seconds\n", elapsedSeconds); // 2.197 sec
+    printf("Elapsed Time: %.6f seconds\n", elapsedSeconds); // 4.876 sec
 
     fclose(fp);
 
-    printf("%d", totalScore);
+    printf("%d\n", score);
 
     return 0;
 }
