@@ -50,7 +50,7 @@ int main(void) {
     // only for testing performance
     clock_t end = clock();
     double elapsedSeconds = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Elapsed Time: %.6f seconds\n", elapsedSeconds); // 4.876 sec
+    printf("Elapsed Time: %.6f seconds\n", elapsedSeconds); // 4.876 sec on 2016 MacBook
 
     fclose(fp);
 
