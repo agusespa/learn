@@ -1,4 +1,11 @@
+#include <glib.h>
+#include <stddef.h>
 #include <stdio.h>
+#include <string.h>
+
+int getPriority(char ch) {
+    // implement
+}
 
 int main(void) {
     FILE *fp = fopen("input.txt", "r");
@@ -8,10 +15,37 @@ int main(void) {
         return 1;
     }
 
+    int prioSum = 0;
+    char string[100];
+
+    while (fgets(string, 100, fp)) {
+        size_t length = strlen(string) - 1;
+        prioSum++;
+        GHashTable *charSet = g_hash_table_new(NULL, NULL);
+
+        for (size_t i = 0; i < length; i++) {
+            char ch = string[i];
+
+            if (i >= length / 2) {
+                gpointer value =
+                    g_hash_table_lookup(charSet, GINT_TO_POINTER(ch));
+
+                if (value != NULL) {
+                    prioSum += getPriority((char) GPOINTER_TO_INT(value));
+                    break;
+                }
+            } else {
+                gboolean added =
+                    g_hash_table_insert(charSet, GINT_TO_POINTER(ch), GINT_TO_POINTER(ch));
+            }
+        }
+
+        g_hash_table_destroy(charSet);
+    }
 
     fclose(fp);
 
-    printf("%d", 1);
+    printf("%d", prioSum);
 
     return 0;
 }
