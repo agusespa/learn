@@ -4,7 +4,12 @@
 #include <string.h>
 
 int getPriority(char ch) {
-    // implement
+    int code = ch;
+    if (code >= 97) {
+        return code - 96;
+    } else {
+        return code - 38;
+    }
 }
 
 int main(void) {
@@ -20,7 +25,6 @@ int main(void) {
 
     while (fgets(string, 100, fp)) {
         size_t length = strlen(string) - 1;
-        prioSum++;
         GHashTable *charSet = g_hash_table_new(NULL, NULL);
 
         for (size_t i = 0; i < length; i++) {
@@ -31,12 +35,13 @@ int main(void) {
                     g_hash_table_lookup(charSet, GINT_TO_POINTER(ch));
 
                 if (value != NULL) {
-                    prioSum += getPriority((char) GPOINTER_TO_INT(value));
+                    int val = (char)GPOINTER_TO_INT(value);
+                    prioSum += getPriority(val);
                     break;
                 }
             } else {
-                gboolean added =
-                    g_hash_table_insert(charSet, GINT_TO_POINTER(ch), GINT_TO_POINTER(ch));
+                gboolean added = g_hash_table_insert(
+                    charSet, GINT_TO_POINTER(ch), GINT_TO_POINTER(ch));
             }
         }
 
