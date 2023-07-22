@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"strings"
 
-	srv "go.net/basic.rest/service"
+	srv "basic-rest/cmd/api/service"
 )
 
 func HandleConnection(conn net.Conn, db *sql.DB) {

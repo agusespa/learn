@@ -1,4 +1,4 @@
-module go.net/basic.rest
+module basic-rest
 
 go 1.20
 

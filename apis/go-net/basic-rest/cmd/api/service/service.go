@@ -6,7 +6,7 @@ import (
 	"net"
 	"net/http"
 
-	mdl "go.net/basic.rest/models"
+	mdl "basic-rest/cmd/api/models"
 )
 
 func PostUser(conn net.Conn, request *http.Request, db *sql.DB) {

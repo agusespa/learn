@@ -7,7 +7,7 @@ import (
 	"net"
 	"time"
 
-	ctr "go.net/basic.rest/controller"
+	ctr "basic-rest/cmd/api/controller"
 
 	"github.com/go-sql-driver/mysql"
 )
