@@ -3,9 +3,10 @@ package service
 import (
 	"database/sql"
 	"encoding/json"
-	mdl "http-comp/go-net/models"
 	"net"
 	"net/http"
+
+	mdl "go.net/basic.rest/models"
 )
 
 func PostUser(conn net.Conn, request *http.Request, db *sql.DB) {

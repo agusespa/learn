@@ -3,11 +3,12 @@ package controller
 import (
 	"bufio"
 	"database/sql"
-	srv "http-comp/go-net/service"
 	"net"
 	"net/http"
 	"regexp"
 	"strings"
+
+	srv "go.net/basic.rest/service"
 )
 
 func HandleConnection(conn net.Conn, db *sql.DB) {

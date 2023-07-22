@@ -3,10 +3,11 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	ctr "http-comp/go-net/controller"
 	"log"
 	"net"
 	"time"
+
+	ctr "go.net/basic.rest/controller"
 
 	"github.com/go-sql-driver/mysql"
 )

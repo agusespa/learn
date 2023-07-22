@@ -1,4 +1,4 @@
-module http-comp/go-net
+module go.net/basic.rest
 
 go 1.20
 
