@@ -71,6 +71,7 @@ int main(void) {
         g_hash_table_destroy(firstCharSet);
         g_hash_table_destroy(secondCharSet);
         memset(stringConcat, 0, sizeof(stringConcat));
+        counter = 0;
     }
 
     fclose(fp);
