@@ -3,16 +3,18 @@
 #include <stdio.h>
 #include <string.h>
 
-int getPriority(char ch) {
-    int code = ch;
-    if (code >= 97) {
-        return code - 96;
+int getPriority(int ch) {
+    if (ch >= 97) {
+        return ch - 96;
     } else {
-        return code - 38;
+        return ch - 38;
     }
 }
 
 int main(void) {
+    // only for testing performance
+    clock_t start = clock();
+
     FILE *fp = fopen("input.txt", "r");
 
     if (fp == NULL) {
@@ -23,60 +25,63 @@ int main(void) {
     int prioSum = 0;
     char string[100];
     int counter = 0;
-    char stringConcat[256];
-    int lenArr[3];
+    char strings[3][100];
 
     while (fgets(string, 100, fp)) {
-        lenArr[counter] = strlen(string);
-
-        counter++;
         if (counter < 2) {
-            strcat(stringConcat, string);
+            strcpy(strings[counter], string);
+            counter++;
             continue;
         }
 
-        strcat(stringConcat, string);
+        strcpy(strings[counter], string);
 
-        size_t length = strlen(stringConcat) - 1;
-        GHashTable *firstCharSet = g_hash_table_new(NULL, NULL);
-        GHashTable *secondCharSet = g_hash_table_new(NULL, NULL);
+        GHashTable *charMap = g_hash_table_new(NULL, NULL);
 
-        for (size_t i = 0; i < length; i++) {
-            char ch = stringConcat[i];
+        for (int i = 0; i < 3; i++) {
+            int length = strlen(strings[i]);
 
-            if (i < lenArr[0]) {
-                gboolean added = g_hash_table_insert(
-                    firstCharSet, GINT_TO_POINTER(ch), GINT_TO_POINTER(ch));
-            } else if (i >= lenArr[0] && i < lenArr[1]) {
-                gpointer value =
-                    g_hash_table_lookup(firstCharSet, GINT_TO_POINTER(ch));
+            for (int j = 0; j < length - 1; j++) {
+                char ch = strings[i][j];
 
-                if (value != NULL) {
-                    gboolean added =
-                        g_hash_table_insert(secondCharSet, GINT_TO_POINTER(ch),
-                                            GINT_TO_POINTER(ch));
-                }
-            } else if (i >= lenArr[1]) {
-                gpointer value =
-                    g_hash_table_lookup(secondCharSet, GINT_TO_POINTER(ch));
+                if (i == 0) {
+                    gboolean added = g_hash_table_insert(
+                        charMap, GINT_TO_POINTER(ch), GINT_TO_POINTER(1));
+                } else if (i == 1) {
+                    gpointer value =
+                        g_hash_table_lookup(charMap, GINT_TO_POINTER(ch));
 
-                if (value != NULL) {
-                    int val = (char)GPOINTER_TO_INT(value);
-                    prioSum += getPriority(val);
-                    break;
+                    if (value != NULL) {
+                        gboolean added = g_hash_table_insert(
+                            charMap, GINT_TO_POINTER(ch), GINT_TO_POINTER(2));
+                    }
+                } else if (i == 2) {
+                    gpointer value =
+                        g_hash_table_lookup(charMap, GINT_TO_POINTER(ch));
+
+                    if (value != NULL) {
+                        int intValue = GPOINTER_TO_INT(value);
+                        if (intValue == 2) {
+                            prioSum += getPriority(ch);
+                            break;
+                        }
+                    }
                 }
             }
         }
 
-        g_hash_table_destroy(firstCharSet);
-        g_hash_table_destroy(secondCharSet);
-        memset(stringConcat, 0, sizeof(stringConcat));
+        g_hash_table_destroy(charMap);
         counter = 0;
     }
 
     fclose(fp);
 
     printf("%d", prioSum);
+
+    // only for testing performance
+    clock_t end = clock();
+    double elapsedSeconds = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Elapsed Time: %.6f seconds\n", elapsedSeconds); // 0.0007 sec on 2016 MacBook
 
     return 0;
 }
