@@ -1,0 +1,8 @@
+syntax = "proto3";
+package log;
+option go_package = "logger/cmd/api";
+
+message Record {
+    bytes value = 1;
+    uint64 offset = 2;
+}

@@ -1,37 +1,32 @@
-portnames = ["PAN", "AMS", "CAS", "NYC", "HEL"]
+import numpy as np
 
-D = [
-        [0,8943,8019,3652,10545],
-        [8943,0,2619,6317,2078],
-        [8019,2619,0,5836,4939],
-        [3652,6317,5836,0,7825],
-        [10545,2078,4939,7825,0]
-    ]
+def generate(p1):
+    seq = np.zeros(10000)
 
-# assume 20g per km per metric ton (of pineapples)
-co2 = 0.020
+    for i in range(0, 10000):
+        num = np.random.random()
+        if num <= p1:
+            seq[i] = 1
 
-smallest = 1000000
-bestroute = [0, 0, 0, 0, 0]
+    return seq
 
+def count(seq):
+    counter = 0
+    count = 0
 
-def permutations(route, ports):
-    global smallest, bestroute
+    for n in seq:
+        if n == 1:
+            counter += 1
+            if counter == 5:
+                count += 1
+                counter = 0
+        else:
+            counter = 0
 
-    if len(ports) < 1:
-        sum = (D[route[0]][route[1]] + D[route[1]][route[2]] + D[route[2]][route[3]] + D[route[3]][route[4]]) * co2
+    return count 
 
-        if sum < smallest:
-            smallest = sum
-            bestroute = route
-    else:
-        for i in range(len(ports)):
-            permutations(route+[ports[i]], ports[:i]+ports[i+1:])
+def main(p1):
+    seq = generate(p1)
+    return count(seq)
 
-
-def main():
-    permutations([0], list(range(1, len(portnames))))
-
-    print(' '.join([portnames[i] for i in bestroute]) + " %.1f kg" % smallest)
-
-main()
+print(main(0.66))
