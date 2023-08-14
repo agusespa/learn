@@ -1,6 +1,16 @@
-FROM openjdk:8-jdk-alpine
-# Environment Variable that defines the endpoint of sentiment-analysis python api.
-ENV SA_LOGIC_API_URL http://localhost:5000
-ADD target/sentiment-analysis-web-0.0.1-SNAPSHOT.jar /
-EXPOSE 8080
-CMD ["java", "-jar", "sentiment-analysis-web-0.0.1-SNAPSHOT.jar", "--sa.logic.api.url=${SA_LOGIC_API_URL}"]
+# syntax=docker/dockerfile:1
+
+FROM golang:1.19
+
+WORKDIR /app
+
+COPY go.mod ./
+RUN go mod download
+
+COPY *.go ./
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o /go-now
+
+EXPOSE 3000
+
+CMD ["/go-now"]
