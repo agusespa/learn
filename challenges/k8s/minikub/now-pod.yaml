@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: now
+  labels:
+    app: now
+spec:
+  containers:
+    - image: agusespa/k8s-go-now
+      name: now
+      ports:
+        - containerPort: 3030
