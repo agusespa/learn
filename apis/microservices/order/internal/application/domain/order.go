@@ -5,9 +5,10 @@ import (
 )
 
 type OrderItem struct {
-	ProductCode string  `json:"product_code"`
-	UnitPrice   float32 `json:"unit_price"`
-	Quantity    int32   `json:"quantity"`
+	ID          int64   `json:"id" db:"item_id"`
+	ProductCode string  `json:"product_code" db:"product_code"`
+	UnitPrice   float32 `json:"unit_price" db:"unit_price"`
+	Quantity    int32   `json:"quantity" db:"quantity"`
 }
 
 type Order struct {

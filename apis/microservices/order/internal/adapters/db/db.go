@@ -1,61 +1,80 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
+	"os"
 
-	"github.com/agusespa/learn/api/microservices/order/internal/application/domain"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	domain "github.com/agusespa/learn/api/microservices/order/internal/application/domain"
+	"github.com/go-sql-driver/mysql"
 )
 
-type Order struct {
-	gorm.Model
-	CustomerID int64
-	Status     string
-	OrderItems []OrderItem
-}
-
-type OrderItem struct {
-	gorm.Model
-	ProductCode string
-	UnitPrice   float32
-	Quantity    int32
-	OrderID     uint
-}
-
 type Adapter struct {
-	db *gorm.DB
+	db *sql.DB
+}
+
+type OrderEntity struct {
+	ID         int64  `db:"order_id"`
+	CustomerID int64  `db:"customer_id"`
+	Status     string `db:"status"`
+	CreatedAt  int64  `db:"created_at"`
 }
 
 func NewAdapter(dataSourceUrl string) (*Adapter, error) {
-	db, openErr := gorm.Open(mysql.Open(dataSourceUrl), &gorm.Config{})
-	if openErr != nil {
-		return nil, fmt.Errorf("db connection error: %v", openErr)
+	cfg := mysql.Config{
+		User:   os.Getenv("DBUSER"),
+		Passwd: os.Getenv("DBPASS"),
+		Net:    "tcp",
+		Addr:   "127.0.0.1:3306",
+		DBName: "databasename",
 	}
-	err := db.AutoMigrate(&Order{}, OrderItem{})
+
+	db, err := sql.Open("mysql", cfg.FormatDSN())
 	if err != nil {
-		return nil, fmt.Errorf("db migration error: %v", err)
+		log.Fatalf("Error opening database connection: %v", err)
 	}
+
+	pingErr := db.Ping()
+	if pingErr != nil {
+		log.Fatalf("Error pinging database: %v", pingErr)
+	}
+
 	return &Adapter{db: db}, nil
 }
 
 func (a Adapter) Get(id string) (domain.Order, error) {
-	var orderEntity Order
-	res := a.db.First(&orderEntity, id)
-	var orderItems []domain.OrderItem
-	for _, orderItem := range orderEntity.OrderItems {
-		orderItems = append(orderItems, domain.OrderItem{
-			ProductCode: orderItem.ProductCode,
-			UnitPrice:   orderItem.UnitPrice,
-			Quantity:    orderItem.Quantity,
-		})
+	var orderEntity OrderEntity
+	row := a.db.QueryRow("SELECT * FROM orders WHERE order_id = ?", id)
+	if err := row.Scan(&orderEntity.ID, &orderEntity.CustomerID, &orderEntity.Status, &orderEntity.CreatedAt); err != nil {
+		if err == sql.ErrNoRows {
+			return domain.Order{}, fmt.Errorf("no order with id %s", id)
+		}
+		return domain.Order{}, fmt.Errorf("%s: %v", id, err)
 	}
+
+	var orderItems []domain.OrderItem
+	rows, err := a.db.Query("SELECT * FROM items WHERE order_id = ?", id)
+	if err != nil {
+		return domain.Order{}, fmt.Errorf("items by order %s: %v", id, err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var orderItem domain.OrderItem
+
+		if err := rows.Scan(&orderItem.ID, &orderItem.ProductCode, &orderItem.UnitPrice, &orderItem.Quantity); err != nil {
+			return domain.Order{}, fmt.Errorf("items by order %s: %v", id, err)
+		}
+		orderItems = append(orderItems, orderItem)
+	}
+
 	order := domain.Order{
 		ID:         int64(orderEntity.ID),
 		CustomerID: orderEntity.CustomerID,
 		Status:     orderEntity.Status,
 		OrderItems: orderItems,
-		CreatedAt:  orderEntity.CreatedAt.UnixNano(),
+		CreatedAt:  orderEntity.CreatedAt,
 	}
-	return order, res.Error
+	return order, nil
 }
