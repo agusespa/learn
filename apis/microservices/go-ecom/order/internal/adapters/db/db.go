@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	domain "github.com/agusespa/learn/api/microservices/order/internal/application/domain"
+	domain "github.com/agusespa/learn/api/microservices/go-ecom/order/internal/application/domain"
 	"github.com/go-sql-driver/mysql"
 )
 

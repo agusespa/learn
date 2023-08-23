@@ -1,6 +1,6 @@
 package ports
 
-import "github.com/agusespa/learn/api/microservices/order/internal/application/domain"
+import "github.com/agusespa/learn/api/microservices/go-ecom/order/internal/application/domain"
 
 type DBPort interface {
 	Get(id string) (domain.Order, error)

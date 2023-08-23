@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/agusespa/learn/api/microservices/order/internal/application/domain"
-	"github.com/agusespa/learn/api/microservices/order/internal/ports"
+	"github.com/agusespa/learn/api/microservices/gi-ecom/order/internal/ports"
+	"github.com/agusespa/learn/api/microservices/go-ecom/order/internal/application/domain"
 )
 
 type Application struct {
