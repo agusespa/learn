@@ -7,10 +7,10 @@ import (
 	"order/internal/application/domain"
 )
 
-func (a Adapter) Create(ctx context.Context, request *pb.CreateOrderRequest) (*pb.OrderResponse, error) {
-	var orderProducts []*domain.OrderProduct
+func (a Adapter) Create(ctx context.Context, request *pb.CreateOrderRequest) (pb.OrderResponse, error) {
+	var orderProducts []domain.OrderProduct
 	for _, orderProduct := range request.OrderProducts {
-		orderProducts = append(orderProducts, &domain.OrderProduct{
+		orderProducts = append(orderProducts, domain.OrderProduct{
 			ID:       orderProduct.ProductId,
 			Quantity: orderProduct.Quantity,
 		})
@@ -20,7 +20,7 @@ func (a Adapter) Create(ctx context.Context, request *pb.CreateOrderRequest) (*p
 
 	result, err := a.api.PlaceOrder(newOrder)
 	if err != nil {
-		return nil, err
+		return pb.OrderResponse{}, err
 	}
 
 	var orderProductsResponse []*pb.OrderProductResponse
@@ -37,7 +37,7 @@ func (a Adapter) Create(ctx context.Context, request *pb.CreateOrderRequest) (*p
 		})
 	}
 
-	createdOrder := &pb.OrderResponse{
+	createdOrder := pb.OrderResponse{
 		OrderId:       result.ID,
 		CustomerId:    result.CustomerID,
 		OrderProducts: orderProductsResponse,
