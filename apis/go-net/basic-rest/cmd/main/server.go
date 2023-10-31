@@ -7,7 +7,8 @@ import (
 	"net"
 	"time"
 
-	ctr "basic-rest/cmd/api/controller"
+	"basic-rest/internal/controller"
+	"basic-rest/internal/repository"
 
 	"github.com/go-sql-driver/mysql"
 )
@@ -34,6 +35,11 @@ func main() {
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(10)
 
+	repo := repository.NewRepository(db)
+	app := &controller.App{
+		Repository: repo,
+	}
+
 	listener, err := net.Listen("tcp", ":8080")
 	if err != nil {
 		log.Println("Listener start fail: ", err)
@@ -51,6 +57,6 @@ func main() {
 			log.Println("Listener connection fail: ", err)
 		}
 
-		go ctr.HandleConnection(conn, db)
+		go app.HandleConnection(conn)
 	}
 }
