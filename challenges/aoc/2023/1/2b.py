@@ -7,36 +7,38 @@ with open("input.txt", 'r') as file:
 # only for testing performance
 start_time = time.time()
 
-def cv1(s):
-  ms = re.findall(r'\d', s)
-  return (int(ms[0]) * 10) + int(ms[-1])
+def match_string(s):
+    if s == "one":
+        return '1'
+    elif s == "two":
+        return '2'
+    elif s == "three":
+        return '3'
+    elif s == "four":
+        return '4'
+    elif s == "five":
+        return '5'
+    elif s == "six":
+        return '6'
+    elif s == "seven":
+        return '7'
+    elif s == "eight":
+        return '8'
+    elif s == "nine":
+        return '9'
+    else:
+        return s
 
-pt1 = sum([cv1(l) for l in lines])
-print(f"Pt 1: {pt1}")
+def find_first_last_digits(s):
+  first = re.findall(r'\d|one|two|three|four|five|six|seven|eight|nine', s)
+  last = re.findall(r'\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin', "".join(reversed(s)))
+  matched_first = match_string(first[0])
+  matched_last = match_string("".join(reversed(last[0])))
+  n = matched_first + matched_last
+  return int(n)
 
-def pn(s):
-  if re.match('\d', s):
-    return int(s)
-
-  return {
-    'one': 1,
-    'two': 2,
-    'three': 3,
-    'four': 4,
-    'five': 5,
-    'six': 6,
-    'seven': 7,
-    'eight': 8,
-    'nine': 9
-  }[s]
-
-def cv2(s):
-  fms = re.findall(r'\d|one|two|three|four|five|six|seven|eight|nine', s)
-  lms = re.findall(r'\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin', "".join(reversed(s)))
-  return (pn(fms[0]) * 10) + pn("".join(reversed(lms[0])))
-
-pt2 = sum([cv2(l) for l in lines])
-print(f"Pt 2: {pt2}")
+result = sum([find_first_last_digits(l) for l in lines])
+print(f"Result: {result}")
 
 
 # only for testing performance
