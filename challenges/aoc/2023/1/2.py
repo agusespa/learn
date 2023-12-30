@@ -1,3 +1,5 @@
+import time
+
 def check_string(s):
     if s == "one":
         return '1'
@@ -25,6 +27,9 @@ def main():
     with open("input.txt", 'r') as file:
         lines = file.readlines()
     
+    # only for testing performance
+    start_time = time.time()
+
     count = 0
     
     for line in lines:
@@ -102,5 +107,10 @@ def main():
         count += int(n)
 
     print(f"result: {count}")
+
+    # only for testing performance
+    end_time = time.time()
+    execution_time = end_time - start_time
+    print("Execution Time:", execution_time, "seconds")
 
 main()
