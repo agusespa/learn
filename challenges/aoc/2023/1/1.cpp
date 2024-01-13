@@ -1,22 +1,23 @@
 #include <ctype.h>
 
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <vector>
+
+using namespace std;
 
 int main() {
-    std::ifstream file("input.txt");
+    // ifstream file("sample.txt");
+    ifstream file("input.txt");
 
-    if (!file.is_open()) {
-        std::cout << "Failed opening file." << std::endl;
-        return 1;
-    }
+    // for testing performance
+    chrono::steady_clock::time_point start = chrono::steady_clock::now();
 
-    std::string line;
+    string line;
     int count = 0;
 
-    while (std::getline(file, line)) {
+    while (getline(file, line)) {
         char first = 'x';
         char last = 'x';
 
@@ -36,12 +37,16 @@ int main() {
 
         int n = ((first - '0') * 10) + (last - '0');
         count += n;
-
     }
 
     file.close();
 
-    std::cout << "result: " << count;
+    cout << "result: " << count;
+
+    // for testing performance
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+    chrono::duration<double> elapsedSeconds = end - start;
+    cout << "Execution Time: " << elapsedSeconds.count() << " seconds" << endl;
 
     return 0;
 }

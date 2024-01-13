@@ -2,7 +2,6 @@
 .DS_Store
 Thumbs.db
 
-
 # C
 # Prerequisites
 *.d
@@ -76,3 +75,6 @@ target/
 # Javascript
 */node_modules
 */build
+
+# Editors
+*.idea
