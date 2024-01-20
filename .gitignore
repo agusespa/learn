@@ -73,10 +73,13 @@ target/
 *.env
 
 # Javascript
-*node_modules
-*build
+node_modules/
+
+# Cmake
+build/
 
 # Editors
 *.idea
-*.vscode
-*.chache
+.idea/
+.vscode/
+.chache/
