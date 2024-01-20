@@ -69,34 +69,50 @@ include CMakeFiles/CMakeSFMLProject.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/CMakeSFMLProject.dir/flags.make
 
-CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o: CMakeFiles/CMakeSFMLProject.dir/flags.make
-CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o: /Users/agusespa/Code/learn/games/sfml/src/main.cpp
-CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o: CMakeFiles/CMakeSFMLProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/agusespa/Code/learn/games/sfml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o -MF CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o.d -o CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o -c /Users/agusespa/Code/learn/games/sfml/src/main.cpp
+CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o: CMakeFiles/CMakeSFMLProject.dir/flags.make
+CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o: /Users/agusespa/Code/learn/games/sfml/src/Game.cpp
+CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o: CMakeFiles/CMakeSFMLProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/agusespa/Code/learn/games/sfml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o -MF CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o.d -o CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o -c /Users/agusespa/Code/learn/games/sfml/src/Game.cpp
 
-CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/agusespa/Code/learn/games/sfml/src/main.cpp > CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.i
+CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/agusespa/Code/learn/games/sfml/src/Game.cpp > CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.i
 
-CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/agusespa/Code/learn/games/sfml/src/main.cpp -o CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.s
+CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/agusespa/Code/learn/games/sfml/src/Game.cpp -o CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.s
+
+CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o: CMakeFiles/CMakeSFMLProject.dir/flags.make
+CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o: /Users/agusespa/Code/learn/games/sfml/src/Window.cpp
+CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o: CMakeFiles/CMakeSFMLProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/agusespa/Code/learn/games/sfml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o -MF CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o.d -o CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o -c /Users/agusespa/Code/learn/games/sfml/src/Window.cpp
+
+CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/agusespa/Code/learn/games/sfml/src/Window.cpp > CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.i
+
+CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/agusespa/Code/learn/games/sfml/src/Window.cpp -o CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.s
 
 # Object files for target CMakeSFMLProject
 CMakeSFMLProject_OBJECTS = \
-"CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o"
+"CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o" \
+"CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o"
 
 # External object files for target CMakeSFMLProject
 CMakeSFMLProject_EXTERNAL_OBJECTS =
 
-bin/CMakeSFMLProject: CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o
+bin/CMakeSFMLProject: CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o
+bin/CMakeSFMLProject: CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o
 bin/CMakeSFMLProject: CMakeFiles/CMakeSFMLProject.dir/build.make
 bin/CMakeSFMLProject: _deps/sfml-build/lib/libsfml-graphics-s.a
 bin/CMakeSFMLProject: _deps/sfml-build/lib/libsfml-window-s.a
 bin/CMakeSFMLProject: _deps/sfml-build/lib/libsfml-system-s.a
 bin/CMakeSFMLProject: CMakeFiles/CMakeSFMLProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/agusespa/Code/learn/games/sfml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bin/CMakeSFMLProject"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/agusespa/Code/learn/games/sfml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable bin/CMakeSFMLProject"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CMakeSFMLProject.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -22,7 +22,7 @@ class Window {
    void Create();
    sf::RenderWindow m_window;
    sf::Vector2u m_windowSize;
-   std::string m_windowTitle;
+   string m_windowTitle;
    bool m_isDone;
    bool m_isFullscreen;
 };

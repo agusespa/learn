@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o"
-  "CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o.d"
+  "CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o"
+  "CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o.d"
+  "CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o"
+  "CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o.d"
   "bin/CMakeSFMLProject"
   "bin/CMakeSFMLProject.pdb"
 )

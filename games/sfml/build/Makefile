@@ -259,29 +259,53 @@ sfml-audio/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build.make _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build
 .PHONY : sfml-audio/fast
 
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
+src/Game.o: src/Game.cpp.o
+.PHONY : src/Game.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CMakeSFMLProject.dir/build.make CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/Game.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CMakeSFMLProject.dir/build.make CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.o
+.PHONY : src/Game.cpp.o
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
+src/Game.i: src/Game.cpp.i
+.PHONY : src/Game.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CMakeSFMLProject.dir/build.make CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/Game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CMakeSFMLProject.dir/build.make CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.i
+.PHONY : src/Game.cpp.i
 
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
+src/Game.s: src/Game.cpp.s
+.PHONY : src/Game.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CMakeSFMLProject.dir/build.make CMakeFiles/CMakeSFMLProject.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/Game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CMakeSFMLProject.dir/build.make CMakeFiles/CMakeSFMLProject.dir/src/Game.cpp.s
+.PHONY : src/Game.cpp.s
+
+src/Window.o: src/Window.cpp.o
+.PHONY : src/Window.o
+
+# target to build an object file
+src/Window.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CMakeSFMLProject.dir/build.make CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.o
+.PHONY : src/Window.cpp.o
+
+src/Window.i: src/Window.cpp.i
+.PHONY : src/Window.i
+
+# target to preprocess a source file
+src/Window.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CMakeSFMLProject.dir/build.make CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.i
+.PHONY : src/Window.cpp.i
+
+src/Window.s: src/Window.cpp.s
+.PHONY : src/Window.s
+
+# target to generate assembly for a file
+src/Window.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CMakeSFMLProject.dir/build.make CMakeFiles/CMakeSFMLProject.dir/src/Window.cpp.s
+.PHONY : src/Window.cpp.s
 
 # Help Target
 help:
@@ -303,9 +327,12 @@ help:
 	@echo "... sfml-network"
 	@echo "... sfml-system"
 	@echo "... sfml-window"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/Game.o"
+	@echo "... src/Game.i"
+	@echo "... src/Game.s"
+	@echo "... src/Window.o"
+	@echo "... src/Window.i"
+	@echo "... src/Window.s"
 .PHONY : help
 
 
