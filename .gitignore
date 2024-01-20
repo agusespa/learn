@@ -82,4 +82,4 @@ build/
 *.idea
 .idea/
 .vscode/
-.chache/
+.cache/
