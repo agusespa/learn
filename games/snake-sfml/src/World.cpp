@@ -1,4 +1,5 @@
 #include "World.h"
+#include <iostream>
 
 World::World(sf::Vector2u l_windSize) {
     m_blockSize = 16;

@@ -6,9 +6,7 @@
 Game::Game()
     : m_window("Snake", sf::Vector2u(800, 600)),
       m_snake(m_world.GetBlockSize()),
-      m_world(sf::Vector2u(800, 600)) {
-    m_clock.restart();
-}
+      m_world(sf::Vector2u(800, 600)) {}
 
 Game::~Game() {}
 
@@ -30,14 +28,12 @@ void Game::HandleInput() {
 
 void Game::Update() {
     m_window.Update();
-
-    float timestep = 0.0f / m_snake.GetSpeed();
-    if (m_elapsed.asSeconds() <= timestep) {
-    std::cout << "elapsed: " << m_elapsed.asSeconds() << std::endl;
-    std::cout << "step: " << timestep << std::endl;
+    m_elapsed = GetElapsed();
+    float timestep = 1.0f / m_snake.GetSpeed();
+    if (m_elapsed.asSeconds() >= timestep) {
         m_snake.Tick();
         m_world.Update(m_snake);
-        m_elapsed -= sf::seconds(timestep);  // Subtracting.
+        RestartClock();
 
         if (m_snake.HasLost()) {
             m_snake.Reset();
@@ -54,6 +50,6 @@ void Game::Render() {
     m_window.EndDraw();
 }
 
-sf::Time Game::GetElapsed() { return m_elapsed; }
+sf::Time Game::GetElapsed() { return m_clock.getElapsedTime(); }
 void Game::RestartClock() { m_elapsed = m_clock.restart(); }
 Window* Game::GetWindow() { return &m_window; }

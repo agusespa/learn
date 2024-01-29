@@ -15,8 +15,8 @@ void Snake::Reset() {
     m_snakeBody.push_back(SnakeSegment(5, 7));
     m_snakeBody.push_back(SnakeSegment(5, 6));
     m_snakeBody.push_back(SnakeSegment(5, 5));
-    SetDirection(Direction::None);
-    m_speed = 20;
+    SetDirection(Direction::Down);
+    m_speed = 4;
     m_lives = 3;
     m_score = 0;
     m_lost = false;
@@ -96,13 +96,13 @@ void Snake::Tick() {
     if (m_dir == Direction::None) {
         return;
     }
-    std::cout << "move";
 
     Move();
     CheckCollision();
 }
 
 void Snake::Move() {
+    std::cout << "move" << std::endl;
     for (int i = m_snakeBody.size() - 1; i > 0; --i) {
         m_snakeBody[i].position = m_snakeBody[i - 1].position;
     }

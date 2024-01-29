@@ -6,6 +6,5 @@ int main(int argc, char* argv[]) {
         game.HandleInput();
         game.Update();
         game.Render();
-        game.RestartClock();
     }
 }
