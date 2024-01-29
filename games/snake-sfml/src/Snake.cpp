@@ -1,5 +1,7 @@
 #include "Snake.h"
 
+#include <iostream>
+
 Snake::Snake(int l_blockSize) {
     m_size = l_blockSize;
     m_bodyRect.setSize(sf::Vector2f(m_size - 1, m_size - 1));
@@ -14,7 +16,7 @@ void Snake::Reset() {
     m_snakeBody.push_back(SnakeSegment(5, 6));
     m_snakeBody.push_back(SnakeSegment(5, 5));
     SetDirection(Direction::None);
-    m_speed = 15;
+    m_speed = 20;
     m_lives = 3;
     m_score = 0;
     m_lost = false;
@@ -94,6 +96,7 @@ void Snake::Tick() {
     if (m_dir == Direction::None) {
         return;
     }
+    std::cout << "move";
 
     Move();
     CheckCollision();

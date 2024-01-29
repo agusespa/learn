@@ -12,8 +12,11 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(CMakeSFMLProject
+    src/Main.cpp
     src/Game.cpp
     src/Window.cpp
+    src/World.cpp
+    src/Snake.cpp
 )
 
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
