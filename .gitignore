@@ -34,8 +34,10 @@ Thumbs.db
 *.dylib
 
 # Executables
+*
 *.exe
 *.out
+*.o
 *.app
 *.i*86
 *.x86_64
