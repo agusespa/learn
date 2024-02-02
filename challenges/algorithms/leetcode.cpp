@@ -1,48 +1,22 @@
 #include <iostream>
 using namespace std;
 
-int map(char c) {
-    switch (c) {
-        case 'I':
-            return 1;
-        case 'V':
-            return 5;
-        case 'X':
-            return 10;
-        case 'L':
-            return 50;
-        case 'C':
-            return 100;
-        case 'D':
-            return 500;
-        case 'M':
-            return 1000;
-        default:
-            return 0;
-    }
-}
+char repeatedCharacter(string s) {
+    int arr[26] = {0};
 
-int romanToInt(string s) {
-    int sum = 0;
-
-    for (int i = 0; i < s.size(); i++) {
-        char c = s[i];
-        char n = s[i + 1];
-
-        if (map(c) < map(n)) {
-            sum -= map(c);
-        } else {
-            sum += map(c);
-        }
+    for (int i = 0; i < s.length(); i++) {
+        int j = int(s[i]) - 97;
+        arr[j]++;
+        if (arr[j] == 2) return s[i];
     }
 
-    return sum;
+    return 0;
 }
 
 int main() {
-    int number = romanToInt("MCMXCIV");
+    char answer = repeatedCharacter("abcdd");
 
-    cout << number << endl;
+    cout << answer << endl;
 
     // for (size_t i = 0; i < s.size(); ++i) {
     //     std::cout << s[i] << " ";

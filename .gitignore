@@ -34,7 +34,7 @@ Thumbs.db
 *.dylib
 
 # Executables
-*
+myexec
 *.exe
 *.out
 *.o
