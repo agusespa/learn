@@ -17,6 +17,7 @@ add_executable(CMakeSFMLProject
     src/Window.cpp
     src/World.cpp
     src/Snake.cpp
+    src/Hud.cpp
 )
 
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)

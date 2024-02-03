@@ -24,7 +24,6 @@ class Snake {
   void IncreaseScore();
   bool HasLost();
   void Lose();
-  void ToggleLost();
   void Extend();
   void Reset();
   void Move();

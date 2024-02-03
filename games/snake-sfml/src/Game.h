@@ -1,3 +1,4 @@
+#include "Hud.h"
 #include "Snake.h"
 #include "Window.h"
 #include "World.h"
@@ -23,4 +24,5 @@ class Game {
   Window m_window;
   World m_world;
   Snake m_snake;
+  Hud m_hud;
 };

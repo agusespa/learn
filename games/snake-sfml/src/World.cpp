@@ -1,5 +1,4 @@
 #include "World.h"
-#include <iostream>
 
 World::World(sf::Vector2u l_windSize) {
     m_blockSize = 16;
@@ -10,19 +9,18 @@ World::World(sf::Vector2u l_windSize) {
     RespawnApple();
 
     for (int i = 0; i < 4; ++i) {
-        m_bounds[i].setFillColor(sf::Color(150, 0, 0));
-        if (!((i + 1) % 2)) {
-            m_bounds[i].setSize(sf::Vector2f(m_windowSize.x, m_blockSize));
-        } else {
-            m_bounds[i].setSize(sf::Vector2f(m_blockSize, m_windowSize.y));
-        }
-        if (i < 2) {
-            m_bounds[i].setPosition(0, 0);
-        } else {
-            m_bounds[i].setOrigin(m_bounds[i].getSize());
-            m_bounds[i].setPosition(sf::Vector2f(m_windowSize));
-        }
+        m_bounds[i].setFillColor(sf::Color(0, 150, 0));
     }
+    // top bound
+    m_bounds[0].setSize(sf::Vector2f(m_windowSize.x, m_blockSize));
+    // left bound
+    m_bounds[1].setSize(sf::Vector2f(m_blockSize, m_windowSize.y));
+    // right bound
+    m_bounds[2].setPosition(sf::Vector2f(m_windowSize.x - m_blockSize, 0));
+    m_bounds[2].setSize(sf::Vector2f(m_blockSize, m_windowSize.y));
+    // bottom bound
+    m_bounds[3].setPosition(sf::Vector2f(0, m_windowSize.y - m_blockSize * 2));
+    m_bounds[3].setSize(sf::Vector2f(m_windowSize.x, m_blockSize * 2));
 }
 
 World::~World() {}
@@ -46,7 +44,7 @@ void World::Update(Snake& l_player) {
 
     if (l_player.GetPosition().x <= 0 || l_player.GetPosition().y <= 0 ||
         l_player.GetPosition().x >= gridSize_x - 1 ||
-        l_player.GetPosition().y >= gridSize_y - 1) {
+        l_player.GetPosition().y >= gridSize_y - 2) {
         l_player.Lose();
     }
 }

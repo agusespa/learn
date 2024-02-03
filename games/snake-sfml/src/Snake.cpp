@@ -1,7 +1,5 @@
 #include "Snake.h"
 
-#include <iostream>
-
 Snake::Snake(int l_blockSize) {
     m_size = l_blockSize;
     m_bodyRect.setSize(sf::Vector2f(m_size - 1, m_size - 1));
@@ -16,7 +14,7 @@ void Snake::Reset() {
     m_snakeBody.push_back(SnakeSegment(5, 6));
     m_snakeBody.push_back(SnakeSegment(5, 5));
     SetDirection(Direction::Down);
-    m_speed = 4;
+    m_speed = 6;
     m_lives = 3;
     m_score = 0;
     m_lost = false;
@@ -24,9 +22,26 @@ void Snake::Reset() {
 
 void Snake::SetDirection(Direction l_dir) { m_dir = l_dir; }
 
-Direction Snake::GetDirection() { return m_dir; }
+Direction Snake::GetDirection() {
+    if (m_snakeBody.size() <= 1) {
+        return Direction::None;
+    }
+    SnakeSegment& head = m_snakeBody[0];
+    SnakeSegment& neck = m_snakeBody[1];
+    if (head.position.x == neck.position.x) {
+        return (head.position.y > neck.position.y ? Direction::Down
+                                                  : Direction::Up);
+    } else if (head.position.y == neck.position.y) {
+        return (head.position.x > neck.position.x ? Direction::Right
+                                                  : Direction::Left);
+    }
+    return Direction::None;
+}
 
-int Snake::GetSpeed() { return m_speed; }
+int Snake::GetSpeed() {
+    int adjustedSpeed = m_speed + ((m_snakeBody.size() - 2) / 2);
+    return adjustedSpeed;
+}
 
 sf::Vector2i Snake::GetPosition() {
     return (!m_snakeBody.empty() ? m_snakeBody.front().position
@@ -42,8 +57,6 @@ void Snake::IncreaseScore() { m_score += 10; }
 bool Snake::HasLost() { return m_lost; }
 
 void Snake::Lose() { m_lost = true; }
-
-void Snake::ToggleLost() { m_lost = !m_lost; }
 
 void Snake::Extend() {
     if (m_snakeBody.empty()) {
@@ -102,7 +115,6 @@ void Snake::Tick() {
 }
 
 void Snake::Move() {
-    std::cout << "move" << std::endl;
     for (int i = m_snakeBody.size() - 1; i > 0; --i) {
         m_snakeBody[i].position = m_snakeBody[i - 1].position;
     }
@@ -137,8 +149,8 @@ void Snake::Cut(int l_segments) {
     for (int i = 0; i < l_segments; ++i) {
         m_snakeBody.pop_back();
     }
-    --m_lives;
-    if (!m_lives) {
+    m_lives--;
+    if (m_lives == 0) {
         Lose();
         return;
     }
