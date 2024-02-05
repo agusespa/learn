@@ -56,7 +56,11 @@ void Snake::IncreaseScore() { m_score += 10; }
 
 bool Snake::HasLost() { return m_lost; }
 
-void Snake::Lose() { m_lost = true; }
+void Snake::Lose() {
+    m_lost = true;
+    m_snakeBody.clear();
+    m_lives = 0;
+}
 
 void Snake::Extend() {
     if (m_snakeBody.empty()) {

@@ -6,6 +6,7 @@ Game::Game()
     : m_window("Snake", sf::Vector2u(496, 512)),
       m_snake(m_world.GetBlockSize()),
       m_hud(m_world.GetBlockSize(), m_window.GetWindowSize()),
+      m_textbox(m_window.GetWindowSize()),
       m_world(sf::Vector2u(496, 512)) {}
 
 Game::~Game() {}
@@ -40,9 +41,7 @@ void Game::Update() {
         RestartClock();
 
         if (m_snake.HasLost()) {
-            // TODO: don't respawn, show game over
-            m_snake.Reset();
-            m_hud.Reset();
+            m_textbox.AddMessage("GAME OVER!\nScore: " + std::to_string(m_snake.GetScore()));
         }
     }
 }
@@ -53,6 +52,7 @@ void Game::Render() {
     m_world.Render(*m_window.GetRenderWindow());
     m_snake.Render(*m_window.GetRenderWindow());
     m_hud.Render(*m_window.GetRenderWindow());
+    m_textbox.Render(*m_window.GetRenderWindow());
 
     m_window.EndDraw();
 }

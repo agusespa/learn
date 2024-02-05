@@ -1,7 +1,8 @@
-#include "Hud.h"
 #include "Snake.h"
 #include "Window.h"
 #include "World.h"
+#include "Hud.h"
+#include "Textbox.h"
 
 class Game {
  public:
@@ -25,4 +26,5 @@ class Game {
   World m_world;
   Snake m_snake;
   Hud m_hud;
+  Textbox m_textbox;
 };

@@ -4,6 +4,8 @@ World::World(sf::Vector2u l_windSize) {
     m_blockSize = 16;
     m_windowSize = l_windSize;
 
+    srand(time(nullptr));
+
     m_appleShape.setFillColor(sf::Color::Red);
     m_appleShape.setRadius(m_blockSize / 2);
     RespawnApple();
