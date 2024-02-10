@@ -12,7 +12,7 @@ Textbox::Textbox(sf::Vector2u l_windSize) {
     m_content.setFillColor(sf::Color::White);
 
     m_backdrop.setSize(sf::Vector2f(l_windSize.x, l_windSize.y));
-    m_backdrop.setFillColor(sf::Color(90, 90, 90, 90));
+    m_backdrop.setFillColor(sf::Color(90, 90, 90, 200));
 }
 
 Textbox::~Textbox() {}

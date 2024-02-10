@@ -12,5 +12,6 @@ class Hud {
  private:
   int m_size;
   sf::Vector2u m_windowSize;
-  sf::RectangleShape m_hearts[3];
+  sf::Texture heartTexture;
+  sf::Sprite m_hearts[3];
 };

@@ -4,14 +4,12 @@ World::World(sf::Vector2u l_windSize) {
     m_blockSize = 16;
     m_windowSize = l_windSize;
 
-    srand(time(nullptr));
-
     m_appleShape.setFillColor(sf::Color::Red);
-    m_appleShape.setRadius(m_blockSize / 2);
+    m_appleShape.setRadius(m_blockSize / 2.0f);
     RespawnApple();
 
     for (int i = 0; i < 4; ++i) {
-        m_bounds[i].setFillColor(sf::Color(0, 150, 0));
+        m_bounds[i].setFillColor(sf::Color(0, 100, 0));
     }
     // top bound
     m_bounds[0].setSize(sf::Vector2f(m_windowSize.x, m_blockSize));
@@ -28,9 +26,10 @@ World::World(sf::Vector2u l_windSize) {
 World::~World() {}
 
 void World::RespawnApple() {
-    int maxX = (m_windowSize.x / m_blockSize) - 2;
-    int maxY = (m_windowSize.y / m_blockSize) - 2 - m_blockSize;
-    m_item = sf::Vector2i(rand() % maxX + 1, rand() % maxY + 1);
+    srand(time(nullptr));
+    int positionsX = (m_windowSize.x / m_blockSize) - 2;
+    int positionsY = (m_windowSize.y / m_blockSize) - 3;
+    m_item = sf::Vector2i(rand() % positionsX + 1, rand() % positionsY + 1);
     m_appleShape.setPosition(m_item.x * m_blockSize, m_item.y * m_blockSize);
 }
 

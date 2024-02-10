@@ -1,8 +1,8 @@
+#include "Hud.h"
 #include "Snake.h"
+#include "Textbox.h"
 #include "Window.h"
 #include "World.h"
-#include "Hud.h"
-#include "Textbox.h"
 
 class Game {
  public:
@@ -13,10 +13,9 @@ class Game {
   void Update();
   void Render();
 
+  Window* GetWindow();
   sf::Time GetElapsed();
   void RestartClock();
-
-  Window* GetWindow();
 
  private:
   sf::Clock m_clock;

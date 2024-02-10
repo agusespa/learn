@@ -5,6 +5,7 @@
 Hud::Hud(int l_blockSize, sf::Vector2u l_windSize) {
     m_size = l_blockSize;
     m_windowSize = l_windSize;
+    heartTexture.loadFromFile("assets/heart.png");
     Reset();
 }
 
@@ -12,19 +13,18 @@ Hud::~Hud() {}
 
 void Hud::Reset() {
     for (int i = 0; i < 3; ++i) {
-        m_hearts[i].setSize(sf::Vector2f(m_size - 2, m_size - 2));
-        // TODO: use dynamic size
-        m_hearts[i].setOrigin(7.0f, 7.0f);
-        m_hearts[i].setFillColor(sf::Color(0, 0, 150));
-        m_hearts[i].setRotation(45);
+        m_hearts[i].setTexture(heartTexture);
+        m_hearts[i].setScale(0.3, 0.3);
+        sf::FloatRect bounds = m_hearts[i].getGlobalBounds();
+        m_hearts[i].setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
         m_hearts[i].setPosition(
-            sf::Vector2f(m_size * (i + 1) * 2, m_windowSize.y - m_size));
+            sf::Vector2f(m_size * (i + 1) * 2, m_windowSize.y - bounds.height - 6));
     }
 }
 
 void Hud::Update(Snake& l_player) {
     for (int i = l_player.GetLives(); i < 3; ++i) {
-        m_hearts[i].setFillColor(sf::Color(0, 150, 0));
+        m_hearts[i].setColor(sf::Color::Transparent);
     }
 }
 
