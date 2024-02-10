@@ -29,7 +29,7 @@ World::~World() {}
 
 void World::RespawnApple() {
     int maxX = (m_windowSize.x / m_blockSize) - 2;
-    int maxY = (m_windowSize.y / m_blockSize) - 2;
+    int maxY = (m_windowSize.y / m_blockSize) - 2 - m_blockSize;
     m_item = sf::Vector2i(rand() % maxX + 1, rand() % maxY + 1);
     m_appleShape.setPosition(m_item.x * m_blockSize, m_item.y * m_blockSize);
 }

@@ -52,7 +52,7 @@ void Game::Render() {
     m_world.Render(*m_window.GetRenderWindow());
     m_snake.Render(*m_window.GetRenderWindow());
     m_hud.Render(*m_window.GetRenderWindow());
-    m_textbox.Render(*m_window.GetRenderWindow());
+    m_textbox.Render(*m_window.GetRenderWindow(), m_window.GetWindowSize());
 
     m_window.EndDraw();
 }
