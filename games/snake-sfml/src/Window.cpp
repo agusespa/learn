@@ -4,8 +4,6 @@
 
 using namespace std;
 
-Window::Window() { Setup("Window", sf::Vector2u(800, 600)); }
-
 Window::Window(const string& l_title, const sf::Vector2u& l_size) {
     Setup(l_title, l_size);
 }

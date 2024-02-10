@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(CMakeSFMLProject LANGUAGES CXX)
+project(Snake LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -11,7 +11,7 @@ FetchContent_Declare(SFML
     GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(CMakeSFMLProject
+add_executable(Snake
     src/Main.cpp
     src/Game.cpp
     src/Window.cpp
@@ -21,7 +21,7 @@ add_executable(CMakeSFMLProject
     src/Textbox.cpp
 )
 
-target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
-target_compile_features(CMakeSFMLProject PRIVATE cxx_std_17)
+target_link_libraries(Snake PRIVATE sfml-graphics)
+target_compile_features(Snake PRIVATE cxx_std_17)
 
-install(TARGETS CMakeSFMLProject)
+install(TARGETS Snake)
