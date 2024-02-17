@@ -3,15 +3,15 @@
 
 class Hud {
  public:
-  Hud(int l_blockSize, sf::Vector2u l_windSize);
+  Hud(int b_size, sf::Vector2u window_size);
   ~Hud();
   void Reset();
-  void Update(Snake& l_player);
-  void Render(sf::RenderWindow& l_window);
+  void Update(Snake& player);
+  void Render(sf::RenderWindow& window);
 
  private:
-  int m_size;
-  sf::Vector2u m_windowSize;
-  sf::Texture heartTexture;
-  sf::Sprite m_hearts[3];
+  int block_size;
+  sf::Vector2u window_size;
+  sf::Texture heart_texture;
+  sf::Sprite hearts[3];
 };

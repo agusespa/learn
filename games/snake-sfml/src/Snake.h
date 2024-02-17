@@ -13,9 +13,9 @@ enum class Direction { None, Up, Down, Left, Right };
 
 class Snake {
  public:
-  Snake(int l_blockSize);
+  Snake(int block_size);
   ~Snake();
-  void SetDirection(Direction l_dir);
+  void SetDirection(Direction dir);
   Direction GetDirection();
   int GetSpeed();
   sf::Vector2i GetPosition();
@@ -28,17 +28,17 @@ class Snake {
   void Reset();
   void Move();
   void Tick();
-  void Cut(int l_segments);
-  void Render(sf::RenderWindow& l_window);
+  void Cut(int segments);
+  void Render(sf::RenderWindow& window);
 
  private:
   void CheckCollision();
-  SnakeContainer m_snakeBody;
-  int m_size;
-  Direction m_dir;
-  int m_speed;
-  int m_lives;
-  int m_score;
-  bool m_lost;
-  sf::RectangleShape m_bodyRect;
+  SnakeContainer snake_body;
+  int size;
+  Direction dir;
+  int speed;
+  int lives;
+  int score;
+  bool lost;
+  sf::RectangleShape body_rect;
 };

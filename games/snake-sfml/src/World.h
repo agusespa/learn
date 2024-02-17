@@ -4,17 +4,17 @@
 
 class World {
  public:
-  World(sf::Vector2u l_windSize);
+  World(sf::Vector2u window_size);
   ~World();
   int GetBlockSize();
   void RespawnApple();
-  void Update(Snake& l_player);
-  void Render(sf::RenderWindow& l_window);
+  void Update(Snake& player);
+  void Render(sf::RenderWindow& window);
 
  private:
-  sf::Vector2u m_windowSize;
-  sf::Vector2i m_item;
-  int m_blockSize;
-  sf::CircleShape m_appleShape;
-  sf::RectangleShape m_bounds[4];
+  sf::Vector2u size;
+  sf::Vector2i item;
+  int block_size;
+  sf::CircleShape apple_shape;
+  sf::RectangleShape bounds[4];
 };

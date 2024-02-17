@@ -4,40 +4,32 @@
 
 using namespace std;
 
-Window::Window(const string& l_title, const sf::Vector2u& l_size) {
-    Setup(l_title, l_size);
+Window::Window(const string& title, const sf::Vector2u& size) {
+    is_done = false;
+    window_size = size;
+    window.create({size.x, size.y, 32}, title,
+                  sf::Style::Close | sf::Style::Titlebar);
 }
 
-Window::~Window() { Destroy(); }
-
-void Window::Setup(const string& l_title, const sf::Vector2u& l_size) {
-    m_windowTitle = l_title;
-    m_windowSize = l_size;
-    m_isDone = false;
-    Create();
-}
-
-void Window::Create() {
-    m_window.create({m_windowSize.x, m_windowSize.y, 32}, m_windowTitle,
-                    sf::Style::Close | sf::Style::Titlebar);
-}
+Window::~Window() { window.close(); }
 
 void Window::Update() {
     sf::Event event;
-    while (m_window.pollEvent(event)) {
+    while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
-            m_isDone = true;
+            is_done = true;
         }
     }
 }
 
-void Window::BeginDraw() { m_window.clear(sf::Color::Black); }
-void Window::Draw(sf::Drawable& l_drawable) { m_window.draw(l_drawable); }
-void Window::EndDraw() { m_window.display(); }
+void Window::BeginDraw() { window.clear(sf::Color::Black); }
 
-bool Window::IsDone() { return m_isDone; }
+void Window::Draw(sf::Drawable& drawable) { window.draw(drawable); }
 
-sf::RenderWindow* Window::GetRenderWindow() { return &m_window; }
-sf::Vector2u Window::GetWindowSize() { return m_windowSize; }
+void Window::EndDraw() { window.display(); }
 
-void Window::Destroy() { m_window.close(); }
+bool Window::IsDone() { return is_done; }
+
+sf::RenderWindow* Window::GetRenderWindow() { return &window; }
+
+sf::Vector2u Window::GetWindowSize() { return window_size; }

@@ -1,60 +1,60 @@
 #include "World.h"
 
-World::World(sf::Vector2u l_windSize) {
-    m_blockSize = 16;
-    m_windowSize = l_windSize;
+World::World(sf::Vector2u size) {
+    block_size = 16;
+    size = size;
 
-    m_appleShape.setFillColor(sf::Color::Red);
-    m_appleShape.setRadius(m_blockSize / 2.0f);
+    apple_shape.setFillColor(sf::Color::Red);
+    apple_shape.setRadius(block_size / 2.0f);
     RespawnApple();
 
     for (int i = 0; i < 4; ++i) {
-        m_bounds[i].setFillColor(sf::Color(0, 100, 0));
+        bounds[i].setFillColor(sf::Color(0, 100, 0));
     }
     // top bound
-    m_bounds[0].setSize(sf::Vector2f(m_windowSize.x, m_blockSize));
+    bounds[0].setSize(sf::Vector2f(size.x, block_size));
     // left bound
-    m_bounds[1].setSize(sf::Vector2f(m_blockSize, m_windowSize.y));
+    bounds[1].setSize(sf::Vector2f(block_size, size.y));
     // right bound
-    m_bounds[2].setPosition(sf::Vector2f(m_windowSize.x - m_blockSize, 0));
-    m_bounds[2].setSize(sf::Vector2f(m_blockSize, m_windowSize.y));
+    bounds[2].setPosition(sf::Vector2f(size.x - block_size, 0));
+    bounds[2].setSize(sf::Vector2f(block_size, size.y));
     // bottom bound
-    m_bounds[3].setPosition(sf::Vector2f(0, m_windowSize.y - m_blockSize * 2));
-    m_bounds[3].setSize(sf::Vector2f(m_windowSize.x, m_blockSize * 2));
+    bounds[3].setPosition(sf::Vector2f(0, size.y - block_size * 2));
+    bounds[3].setSize(sf::Vector2f(size.x, block_size * 2));
 }
 
 World::~World() {}
 
 void World::RespawnApple() {
     srand(time(nullptr));
-    int positionsX = (m_windowSize.x / m_blockSize) - 2;
-    int positionsY = (m_windowSize.y / m_blockSize) - 3;
-    m_item = sf::Vector2i(rand() % positionsX + 1, rand() % positionsY + 1);
-    m_appleShape.setPosition(m_item.x * m_blockSize, m_item.y * m_blockSize);
+    int x_pos = (size.x / block_size) - 2;
+    int y_pos = (size.y / block_size) - 3;
+    item = sf::Vector2i(rand() % x_pos + 1, rand() % y_pos + 1);
+    apple_shape.setPosition(item.x * block_size, item.y * block_size);
 }
 
-void World::Update(Snake& l_player) {
-    if (l_player.GetPosition() == m_item) {
-        l_player.Extend();
-        l_player.IncreaseScore();
+void World::Update(Snake& player) {
+    if (player.GetPosition() == item) {
+        player.Extend();
+        player.IncreaseScore();
         RespawnApple();
     }
 
-    int gridSize_x = m_windowSize.x / m_blockSize;
-    int gridSize_y = m_windowSize.y / m_blockSize;
+    int gridSize_x = size.x / block_size;
+    int gridSize_y = size.y / block_size;
 
-    if (l_player.GetPosition().x <= 0 || l_player.GetPosition().y <= 0 ||
-        l_player.GetPosition().x >= gridSize_x - 1 ||
-        l_player.GetPosition().y >= gridSize_y - 2) {
-        l_player.Lose();
+    if (player.GetPosition().x <= 0 || player.GetPosition().y <= 0 ||
+        player.GetPosition().x >= gridSize_x - 1 ||
+        player.GetPosition().y >= gridSize_y - 2) {
+        player.Lose();
     }
 }
 
-void World::Render(sf::RenderWindow& l_window) {
+void World::Render(sf::RenderWindow& window) {
     for (int i = 0; i < 4; ++i) {
-        l_window.draw(m_bounds[i]);
+        window.draw(bounds[i]);
     }
-    l_window.draw(m_appleShape);
+    window.draw(apple_shape);
 }
 
-int World::GetBlockSize() { return m_blockSize; }
+int World::GetBlockSize() { return block_size; }
