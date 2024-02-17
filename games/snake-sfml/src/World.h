@@ -4,7 +4,7 @@
 
 class World {
  public:
-  World(sf::Vector2u l_windSize);
+  World(sf::Vector2u l_wind_size);
   ~World();
   int GetBlockSize();
   void RespawnApple();
@@ -12,9 +12,9 @@ class World {
   void Render(sf::RenderWindow& l_window);
 
  private:
-  sf::Vector2u m_windowSize;
+  sf::Vector2u m_window_size;
   sf::Vector2i m_item;
-  int m_blockSize;
-  sf::CircleShape m_appleShape;
+  int m_block_size;
+  sf::CircleShape m_apple_shape;
   sf::RectangleShape m_bounds[4];
 };

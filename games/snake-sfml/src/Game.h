@@ -12,15 +12,14 @@ class Game {
   void HandleInput();
   void Update();
   void Render();
-
   Window* GetWindow();
+
+ private:
   sf::Time GetElapsed();
   void RestartClock();
 
- private:
   sf::Clock m_clock;
   sf::Time m_elapsed;
-
   Window m_window;
   World m_world;
   Snake m_snake;

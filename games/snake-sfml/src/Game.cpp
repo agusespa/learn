@@ -58,5 +58,7 @@ void Game::Render() {
 }
 
 sf::Time Game::GetElapsed() { return m_clock.getElapsedTime(); }
+
 void Game::RestartClock() { m_elapsed = m_clock.restart(); }
+
 Window* Game::GetWindow() { return &m_window; }

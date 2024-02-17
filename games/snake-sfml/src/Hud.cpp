@@ -2,10 +2,10 @@
 
 #include "Snake.h"
 
-Hud::Hud(int l_blockSize, sf::Vector2u l_windSize) {
-    m_size = l_blockSize;
-    m_windowSize = l_windSize;
-    heartTexture.loadFromFile("assets/heart.png");
+Hud::Hud(int l_block_size, sf::Vector2u l_wind_size) {
+    m_size = l_block_size;
+    m_window_size = l_wind_size;
+    m_heart_texture.loadFromFile("assets/heart.png");
     Reset();
 }
 
@@ -13,12 +13,12 @@ Hud::~Hud() {}
 
 void Hud::Reset() {
     for (int i = 0; i < 3; ++i) {
-        m_hearts[i].setTexture(heartTexture);
+        m_hearts[i].setTexture(m_heart_texture);
         m_hearts[i].setScale(0.3, 0.3);
         sf::FloatRect bounds = m_hearts[i].getGlobalBounds();
         m_hearts[i].setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
         m_hearts[i].setPosition(
-            sf::Vector2f(m_size * (i + 1) * 2, m_windowSize.y - bounds.height - 6));
+            sf::Vector2f(m_size * (i + 1) * 2, m_window_size.y - bounds.height - 6));
     }
 }
 

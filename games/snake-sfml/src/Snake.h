@@ -13,7 +13,7 @@ enum class Direction { None, Up, Down, Left, Right };
 
 class Snake {
  public:
-  Snake(int l_blockSize);
+  Snake(int l_block_size);
   ~Snake();
   void SetDirection(Direction l_dir);
   Direction GetDirection();
@@ -33,12 +33,12 @@ class Snake {
 
  private:
   void CheckCollision();
-  SnakeContainer m_snakeBody;
+  SnakeContainer m_snake_body;
   int m_size;
   Direction m_dir;
   int m_speed;
   int m_lives;
   int m_score;
   bool m_lost;
-  sf::RectangleShape m_bodyRect;
+  sf::RectangleShape m_body_rect;
 };

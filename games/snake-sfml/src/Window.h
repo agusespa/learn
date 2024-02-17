@@ -17,12 +17,8 @@ class Window {
   sf::Vector2u GetWindowSize();
 
  private:
-  void Setup(const string& l_title, const sf::Vector2u& l_size);
-  void Create();
-  void Destroy();
-
   sf::RenderWindow m_window;
-  sf::Vector2u m_windowSize;
-  string m_windowTitle;
-  bool m_isDone;
+  sf::Vector2u m_window_size;
+  string m_window_title;
+  bool m_is_done;
 };
