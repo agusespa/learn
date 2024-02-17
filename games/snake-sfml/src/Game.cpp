@@ -3,63 +3,60 @@
 #include <SFML/Graphics.hpp>
 
 Game::Game()
-    : window("Snake", sf::Vector2u(496, 512)),
-      snake(world.GetBlockSize()),
-      hud(world.GetBlockSize(), window.GetWindowSize()),
-      textbox(window.GetWindowSize()),
-      world(sf::Vector2u(496, 512)) {}
+    : m_window("Snake", sf::Vector2u(496, 512)),
+      m_snake(m_world.GetBlockSize()),
+      m_hud(m_world.GetBlockSize(), m_window.GetWindowSize()),
+      m_textbox(m_window.GetWindowSize()),
+      m_world(sf::Vector2u(496, 512)) {}
 
 Game::~Game() {}
 
 void Game::HandleInput() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
-        snake.GetDirection() != Direction::Down) {
-        snake.SetDirection(Direction::Up);
+        m_snake.GetDirection() != Direction::Down) {
+        m_snake.SetDirection(Direction::Up);
 
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
-               snake.GetDirection() != Direction::Up) {
-        snake.SetDirection(Direction::Down);
+               m_snake.GetDirection() != Direction::Up) {
+        m_snake.SetDirection(Direction::Down);
 
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) &&
-               snake.GetDirection() != Direction::Right) {
-        snake.SetDirection(Direction::Left);
+               m_snake.GetDirection() != Direction::Right) {
+        m_snake.SetDirection(Direction::Left);
 
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
-               snake.GetDirection() != Direction::Left) {
-        snake.SetDirection(Direction::Right);
+               m_snake.GetDirection() != Direction::Left) {
+        m_snake.SetDirection(Direction::Right);
     }
 }
 
 void Game::Update() {
-    window.Update();
-    elapsed = GetElapsed();
-    float timestep = 1.0f / snake.GetSpeed();
-    if (elapsed.asSeconds() >= timestep) {
-        snake.Tick();
-        world.Update(snake);
-        hud.Update(snake);
+    m_window.Update();
+    m_elapsed = GetElapsed();
+    float timestep = 1.0f / m_snake.GetSpeed();
+    if (m_elapsed.asSeconds() >= timestep) {
+        m_snake.Tick();
+        m_world.Update(m_snake);
+        m_hud.Update(m_snake);
         RestartClock();
 
-        if (snake.HasLost()) {
-            textbox.AddMessage("GAME OVER!\nScore: " +
-                               std::to_string(snake.GetScore()));
+        if (m_snake.HasLost()) {
+            m_textbox.AddMessage("GAME OVER!\nScore: " + std::to_string(m_snake.GetScore()));
         }
     }
 }
 
 void Game::Render() {
-    window.BeginDraw();
+    m_window.BeginDraw();
 
-    world.Render(*window.GetRenderWindow());
-    snake.Render(*window.GetRenderWindow());
-    hud.Render(*window.GetRenderWindow());
-    textbox.Render(*window.GetRenderWindow(), window.GetWindowSize());
+    m_world.Render(*m_window.GetRenderWindow());
+    m_snake.Render(*m_window.GetRenderWindow());
+    m_hud.Render(*m_window.GetRenderWindow());
+    m_textbox.Render(*m_window.GetRenderWindow(), m_window.GetWindowSize());
 
-    window.EndDraw();
+    m_window.EndDraw();
 }
 
-sf::Time Game::GetElapsed() { return clock.getElapsedTime(); }
-
-void Game::RestartClock() { elapsed = clock.restart(); }
-
-Window* Game::GetWindow() { return &window; }
+sf::Time Game::GetElapsed() { return m_clock.getElapsedTime(); }
+void Game::RestartClock() { m_elapsed = m_clock.restart(); }
+Window* Game::GetWindow() { return &m_window; }

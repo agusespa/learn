@@ -1,34 +1,33 @@
 #include "Snake.h"
-#include <iostream>
 
-Snake::Snake(int block_size) {
-    size = block_size;
-    body_rect.setSize(sf::Vector2f(size - 1, size - 1));
+Snake::Snake(int l_blockSize) {
+    m_size = l_blockSize;
+    m_bodyRect.setSize(sf::Vector2f(m_size - 1, m_size - 1));
     Reset();
 }
 
 Snake::~Snake() {}
 
 void Snake::Reset() {
-    snake_body.clear();
-    snake_body.push_back(SnakeSegment(5, 7));
-    snake_body.push_back(SnakeSegment(5, 6));
-    snake_body.push_back(SnakeSegment(5, 5));
+    m_snakeBody.clear();
+    m_snakeBody.push_back(SnakeSegment(5, 7));
+    m_snakeBody.push_back(SnakeSegment(5, 6));
+    m_snakeBody.push_back(SnakeSegment(5, 5));
     SetDirection(Direction::Down);
-    speed = 6;
-    lives = 3;
-    score = 0;
-    lost = false;
+    m_speed = 6;
+    m_lives = 3;
+    m_score = 0;
+    m_lost = false;
 }
 
-void Snake::SetDirection(Direction dir) { dir = dir; }
+void Snake::SetDirection(Direction l_dir) { m_dir = l_dir; }
 
 Direction Snake::GetDirection() {
-    if (snake_body.size() <= 1) {
+    if (m_snakeBody.size() <= 1) {
         return Direction::None;
     }
-    SnakeSegment& head = snake_body[0];
-    SnakeSegment& neck = snake_body[1];
+    SnakeSegment& head = m_snakeBody[0];
+    SnakeSegment& neck = m_snakeBody[1];
     if (head.position.x == neck.position.x) {
         return (head.position.y > neck.position.y ? Direction::Down
                                                   : Direction::Up);
@@ -40,78 +39,78 @@ Direction Snake::GetDirection() {
 }
 
 int Snake::GetSpeed() {
-    int adjustedSpeed = speed + ((snake_body.size() - 2) / 2);
+    int adjustedSpeed = m_speed + ((m_snakeBody.size() - 2) / 2);
     return adjustedSpeed;
 }
 
 sf::Vector2i Snake::GetPosition() {
-    return (!snake_body.empty() ? snake_body.front().position
-                                : sf::Vector2i(1, 1));
+    return (!m_snakeBody.empty() ? m_snakeBody.front().position
+                                 : sf::Vector2i(1, 1));
 }
 
-int Snake::GetLives() { return lives; }
+int Snake::GetLives() { return m_lives; }
 
-int Snake::GetScore() { return score; }
+int Snake::GetScore() { return m_score; }
 
-void Snake::IncreaseScore() { score += 10; }
+void Snake::IncreaseScore() { m_score += 10; }
 
-bool Snake::HasLost() { return lost; }
+bool Snake::HasLost() { return m_lost; }
 
 void Snake::Lose() {
-    lost = true;
-    snake_body.clear();
-    lives = 0;
+    m_lost = true;
+    m_snakeBody.clear();
+    m_lives = 0;
 }
 
 void Snake::Extend() {
-    if (snake_body.empty()) {
+    if (m_snakeBody.empty()) {
         return;
     }
 
-    SnakeSegment& tail_head = snake_body[snake_body.size() - 1];
+    SnakeSegment& tail_head = m_snakeBody[m_snakeBody.size() - 1];
 
-    if (snake_body.size() > 1) {
-        SnakeSegment& tail_bone = snake_body[snake_body.size() - 2];
+    if (m_snakeBody.size() > 1) {
+        SnakeSegment& tail_bone = m_snakeBody[m_snakeBody.size() - 2];
         if (tail_head.position.x == tail_bone.position.x) {
             if (tail_head.position.y > tail_bone.position.y) {
-                snake_body.push_back(
-                    SnakeSegment(tail_head.position.x, tail_head.position.y + 1));
+                m_snakeBody.push_back(SnakeSegment(tail_head.position.x,
+                                                   tail_head.position.y + 1));
             } else {
-                snake_body.push_back(
-                    SnakeSegment(tail_head.position.x, tail_head.position.y - 1));
+                m_snakeBody.push_back(SnakeSegment(tail_head.position.x,
+                                                   tail_head.position.y - 1));
             }
         } else if (tail_head.position.y == tail_bone.position.y) {
             if (tail_head.position.x > tail_bone.position.x) {
-                snake_body.push_back(
-                    SnakeSegment(tail_head.position.x + 1, tail_head.position.y));
+                m_snakeBody.push_back(SnakeSegment(tail_head.position.x + 1,
+                                                   tail_head.position.y));
             } else {
-                snake_body.push_back(
-                    SnakeSegment(tail_head.position.x - 1, tail_head.position.y));
+                m_snakeBody.push_back(SnakeSegment(tail_head.position.x - 1,
+                                                   tail_head.position.y));
             }
         }
     } else {
-        if (dir == Direction::Up) {
-            snake_body.push_back(
+        if (m_dir == Direction::Up) {
+            m_snakeBody.push_back(
                 SnakeSegment(tail_head.position.x, tail_head.position.y + 1));
-        } else if (dir == Direction::Down) {
-            snake_body.push_back(
+        } else if (m_dir == Direction::Down) {
+            m_snakeBody.push_back(
                 SnakeSegment(tail_head.position.x, tail_head.position.y - 1));
-        } else if (dir == Direction::Left) {
-            snake_body.push_back(
+        } else if (m_dir == Direction::Left) {
+            m_snakeBody.push_back(
                 SnakeSegment(tail_head.position.x + 1, tail_head.position.y));
-        } else if (dir == Direction::Right) {
-            snake_body.push_back(
+        } else if (m_dir == Direction::Right) {
+            m_snakeBody.push_back(
                 SnakeSegment(tail_head.position.x - 1, tail_head.position.y));
         }
     }
 }
 
 void Snake::Tick() {
-    if (snake_body.empty()) {
+    if (m_snakeBody.empty()) {
         return;
     }
 
-    if (dir == Direction::None) {
+    if (m_dir == Direction::None) {
         return;
     }
 
@@ -120,62 +119,63 @@ void Snake::Tick() {
 }
 
 void Snake::Move() {
-    for (int i = snake_body.size() - 1; i > 0; --i) {
-        snake_body[i].position = snake_body[i - 1].position;
+    for (int i = m_snakeBody.size() - 1; i > 0; --i) {
+        m_snakeBody[i].position = m_snakeBody[i - 1].position;
     }
-    if (dir == Direction::Left) {
-        --snake_body[0].position.x;
-    } else if (dir == Direction::Right) {
-        ++snake_body[0].position.x;
-    } else if (dir == Direction::Up) {
-        --snake_body[0].position.y;
-    } else if (dir == Direction::Down) {
-        ++snake_body[0].position.y;
+    if (m_dir == Direction::Left) {
+        --m_snakeBody[0].position.x;
+    } else if (m_dir == Direction::Right) {
+        ++m_snakeBody[0].position.x;
+    } else if (m_dir == Direction::Up) {
+        --m_snakeBody[0].position.y;
+    } else if (m_dir == Direction::Down) {
+        ++m_snakeBody[0].position.y;
     }
 }
 
 void Snake::CheckCollision() {
-    if (snake_body.size() < 5) {
+    if (m_snakeBody.size() < 5) {
         return;
     }
 
-    SnakeSegment& head = snake_body.front();
+    SnakeSegment& head = m_snakeBody.front();
 
-    for (auto itr = snake_body.begin() + 1; itr != snake_body.end(); ++itr) {
+    for (auto itr = m_snakeBody.begin() + 1; itr != m_snakeBody.end(); ++itr) {
         if (itr->position == head.position) {
-            int segments = snake_body.end() - itr;
+            int segments = m_snakeBody.end() - itr;
             Cut(segments);
             break;
         }
     }
 }
 
-void Snake::Cut(int segments) {
-    std::cout << "cut " << segments << std::endl;
-    for (int i = 0; i < segments; ++i) {
-        snake_body.pop_back();
+void Snake::Cut(int l_segments) {
+    for (int i = 0; i < l_segments; ++i) {
+        m_snakeBody.pop_back();
     }
-    lives--;
-    if (lives == 0) {
+    m_lives--;
+    if (m_lives == 0) {
         Lose();
         return;
     }
 }
 
-void Snake::Render(sf::RenderWindow& window) {
-    if (snake_body.empty()) {
+void Snake::Render(sf::RenderWindow& l_window) {
+    if (m_snakeBody.empty()) {
         return;
     }
 
-    auto head = snake_body.begin();
-    body_rect.setFillColor(sf::Color(255, 255, 0));
-    body_rect.setPosition(head->position.x * size, head->position.y * size);
+    auto head = m_snakeBody.begin();
+    m_bodyRect.setFillColor(sf::Color(255, 255, 0));
+    m_bodyRect.setPosition(head->position.x * m_size,
+                           head->position.y * m_size);
 
-    window.draw(body_rect);
-    body_rect.setFillColor(sf::Color::White);
+    l_window.draw(m_bodyRect);
+    m_bodyRect.setFillColor(sf::Color::White);
 
-    for (auto itr = snake_body.begin() + 1; itr != snake_body.end(); ++itr) {
-        body_rect.setPosition(itr->position.x * size, itr->position.y * size);
-        window.draw(body_rect);
+    for (auto itr = m_snakeBody.begin() + 1; itr != m_snakeBody.end(); ++itr) {
+        m_bodyRect.setPosition(itr->position.x * m_size,
+                               itr->position.y * m_size);
+        l_window.draw(m_bodyRect);
     }
 }

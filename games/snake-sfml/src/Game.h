@@ -14,16 +14,16 @@ class Game {
   void Render();
 
   Window* GetWindow();
+  sf::Time GetElapsed();
+  void RestartClock();
 
  private:
-  void RestartClock();
-  sf::Time GetElapsed();
+  sf::Clock m_clock;
+  sf::Time m_elapsed;
 
-  sf::Clock clock;
-  sf::Time elapsed;
-  Window window;
-  World world;
-  Snake snake;
-  Hud hud;
-  Textbox textbox;
+  Window m_window;
+  World m_world;
+  Snake m_snake;
+  Hud m_hud;
+  Textbox m_textbox;
 };
