@@ -5,11 +5,13 @@ import {
     AmbientLight,
     DirectionalLight,
     Mesh,
+    Scene,
+    PerspectiveCamera
 } from "three";
 import { VRButton } from "three/addons/webxr/VRButton.js";
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(
+const scene = new Scene();
+const camera = new PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
     0.1,
