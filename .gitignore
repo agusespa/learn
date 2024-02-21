@@ -76,6 +76,7 @@ target/
 
 # Javascript
 node_modules/
+dist/
 
 # Cmake
 build/
