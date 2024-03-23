@@ -93,3 +93,4 @@ build/
 **/unity/**/Temp/
 **/unity/**/Logs/
 **/unity/**/Library/
+**/unity/**/obj/
