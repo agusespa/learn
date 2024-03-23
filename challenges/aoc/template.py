@@ -1,7 +1,7 @@
 import time
 
-with open("sample.txt", 'r') as file:
-# with open("input.txt", 'r') as file:
+with open("sample.txt", "r") as file:
+    # with open("input.txt", 'r') as file:
     lines = file.readlines()
 
 # only for testing performance
