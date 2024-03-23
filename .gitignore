@@ -88,8 +88,8 @@ build/
 .cache/
 
 # Unity
-unity/**/UserSettings/
-unity/**/ProjectSettings/
-unity/**/Temp/
-unity/**/Logs/
-unity/**/Library/
+**/unity/**/UserSettings/
+**/unity/**/ProjectSettings/
+**/unity/**/Temp/
+**/unity/**/Logs/
+**/unity/**/Library/
