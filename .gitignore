@@ -86,3 +86,10 @@ build/
 .idea/
 .vscode/
 .cache/
+
+# Unity
+unity/**/UserSettings/
+unity/**/ProjectSettings/
+unity/**/Temp/
+unity/**/Logs/
+unity/**/Library/
